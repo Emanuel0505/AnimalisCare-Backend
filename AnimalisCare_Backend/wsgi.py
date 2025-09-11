@@ -1,5 +1,5 @@
 """
-WSGI config for AnimalSacare_Backend project.
+WSGI config for AnimalisCare_Backend project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'AnimalSacare_Backend.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'AnimalisCare_Backend.settings')
 
 application = get_wsgi_application()
