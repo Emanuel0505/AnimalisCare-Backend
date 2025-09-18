@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog - AnimalisCare</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1><a href="/" class="logo">AnimalisCare Blog</a></h1>
+            <div style="margin-top:.5rem;">
+                <a href="{% url 'blog_create' %}" class="btn">Criar novo post</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="posts">
+            <h2>Posts Recentes</h2>
+                {% for p in blog_post %}
+                <div class="grid">
+                        <article class="card">
+                            {% if p.imagem %}
+                            <div class="card-image">
+                                <img src="{{ p.imagem.url }}" alt="{{ p.titulo }}">
+                            </div>
+                            {% endif %}
+                            
+                            <div class="card-content">
+                                <h3>{{ p.titulo }}</h3>
+                                <p class="meta">Por {{ p.autor }} • {{ p.data_criada|date:'d/m/Y' }}</p>
+                                <p class="excerpt">{{ p.conteudo|truncatewords:2 }}</p>
+                            </div>
+                        </article>
+                </div>
+                {% endfor %}
+        </section>
+
+        <aside class="autores">
+            <h2>Autores</h2>
+            {% if autores %}
+                <ul class="autor-list">
+                    {% for autor in autores %}
+                        <li class="autor-item">
+                            {% if autor.profile_picture %}
+                                <img src="{{ autor.profile_picture.url }}" alt="{{ autor.name }}" class="autor-foto">
+                            {% endif %}
+                            <div>
+                                <strong>{{ autor.name }}</strong>
+                                <p class="bio">{{ autor.bio|truncatewords:15 }}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="empty">Nenhum autor cadastrado.</p>
+            {% endif %}
+        </aside>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; {{ now|default:2025 }} AnimalisCare. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
