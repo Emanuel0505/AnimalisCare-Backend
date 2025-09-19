@@ -6,10 +6,6 @@ class BlogPost(models.Model):
     conteudo = models.TextField(verbose_name="Conteúdo")
     autor = models.CharField(max_length=100, verbose_name="Autor")
     data_criada = models.DateField(auto_now_add=True, verbose_name="Data de Criação")
-    imagem = models.ImageField(upload_to='blog_images/%Y/%m/%d/', verbose_name="Imagem")
+    imagem = models.ImageField(upload_to='blog_images/%Y/%m/%d/')
 
-class Autor(models.Model):
-    name = models.CharField(max_length=100, verbose_name="Nome")
-    bio = models.TextField(verbose_name="Biografia")
-    profile_picture = models.ImageField(upload_to='autor_imagens/', verbose_name="Foto de Perfil")
 
