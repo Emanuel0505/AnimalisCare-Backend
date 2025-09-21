@@ -34,11 +34,22 @@
                 <p class="meta">Ativo: {{ selected_tags|join:', ' }}</p>
             {% endif %}
         </aside>
+
+        <div class="sort-bar" style="grid-column: 1 / -1;">
+            <span class="sort-label">Ordenar:</span>
+            <a class="sort-link {% if request.GET.ordem == 'recente' %}active{% endif %}"
+               href="?ordem=recente{% for t in selected_tags %}&amp;tags={{ t }}{% endfor %}">Mais recente</a>
+            <a class="sort-link {% if request.GET.ordem == 'antigo' %}active{% endif %}"
+               href="?ordem=antigo{% for t in selected_tags %}&amp;tags={{ t }}{% endfor %}">Mais antigo</a>
+            <a class="sort-link {% if request.GET.ordem == 'popular' %}active{% endif %}"
+               href="?ordem=popular{% for t in selected_tags %}&amp;tags={{ t }}{% endfor %}">Popular</a>
+        </div>
         <section class="posts">
             <h2>Posts Recentes</h2>
                 <div class="grid">
                 {% for p in blog_post %}
-                        <article class="card">
+                    <article class="card">
+                        <a href="{% url 'blog_detalhe' p.id %}?next={{ request.get_full_path|urlencode }}">   
                             {% if p.imagem %}
                             <div class="card-image">
                                 <img src="{{ p.imagem.url }}" alt="{{ p.titulo }}">
@@ -52,14 +63,15 @@
                                 {% if p.tags.all %}
                                 <div class="post-tags">
                                     {% for t in p.tags.all %}
-                                        <span title="{{ t.descricao }}" class="tag-chip">
-                                            {{ t.nome }}
-                                        </span>
+                                    <span title="{{ t.descricao }}" class="tag-chip">
+                                        {{ t.nome }}
+                                    </span>
                                     {% endfor %}
                                 </div>
                                 {% endif %}
                             </div>
-                        </article>
+                        </a>
+                    </article>
                 {% endfor %}
                 </div>
         </section>

@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
-from django.db.models import Count, Q
+from django.shortcuts import render,  redirect, get_object_or_404
+from django.db.models import Count, Q, F
+from django.urls import reverse
 from .models import BlogPost, Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -16,6 +17,15 @@ def blog_home(request):
             .filter(num_tags=len(selected_tags))
         )
 
+    # Ordenação(mais recente, mais antigo, e mais popular)
+
+    ordem = request.GET.get('ordem')
+    if ordem == 'recente':
+        blog_post = blog_post.order_by('-data_criada')
+    elif ordem == 'antigo':
+        blog_post = blog_post.order_by('data_criada')
+    elif ordem == 'popular':
+        blog_post = blog_post.order_by('-views')
 
     # Paginação
     pagina = request.GET.get('pagina', 1)
@@ -68,3 +78,17 @@ def create_tag(request):
         tag.save()
 
     return render(request, 'blog_create.html')
+
+def view_detalhe(request, blog_id):
+    blog_post = get_object_or_404(BlogPost, id=blog_id);
+    views_posts = request.session.get('views_posts', [])
+
+    if blog_id not in views_posts:
+        BlogPost.objects.filter(id=blog_post.id).update(views=F('views') + 1)
+        blog_post.refresh_from_db()
+
+        views_posts.append(blog_id)
+        request.session['views_posts'] = views_posts
+
+    next_url = request.GET.get('next') or reverse('blog')
+    return redirect(next_url)

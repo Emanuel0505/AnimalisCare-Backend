@@ -56,3 +56,10 @@ h2 { margin-bottom: 1rem; }
 .tag-dot { display:inline-block; width:.9rem; height:.9rem; border-radius:50%; background:#e5e7eb; }
 .post-tags { display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.5rem; }
 .tag-chip { display:inline-block; padding:.2rem .5rem; border-radius:999px; font-size:.75rem; background:#eef2ff; border:1px solid var(--border); }
+
+/* Ordenação */
+.sort-bar { display:flex; align-items:center; gap:.75rem; margin: .25rem 0 1rem; }
+.sort-label { color: var(--muted); font-size:.9rem; }
+.sort-link { text-decoration:none; color: var(--text); padding:.35rem .6rem; border:1px solid var(--border); border-radius:999px; background:#fff; }
+.sort-link:hover { border-color: var(--primary); color: var(--primary); }
+.sort-link.active { background: var(--primary); border-color: var(--primary); color: #fff; }
