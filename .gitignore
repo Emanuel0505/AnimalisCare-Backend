@@ -45,8 +45,7 @@ pip-wheel-metadata/
 # Django
 db.sqlite3
 *.sqlite3
-media/
-uploads/s
+uploads/
 staticfiles/
 static_root/
 local_settings.py
