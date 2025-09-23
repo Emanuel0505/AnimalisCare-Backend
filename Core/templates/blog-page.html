@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet Shop</title>
-    <link rel="stylesheet" href="blog-page.css">
+    <link rel="stylesheet" href="{% static 'css/blog-page.css' %}">
 </head>
 <body>
   <!-- Barra de navegação -->
@@ -12,14 +13,13 @@
     <div class="left-section">
       <!-- Logo -->
       <div class="logo">
-        <img src="images/paw-icon.svg" alt="Logo">
+        <img src="{% static 'media/blog_images/paw-icon.svg' %}" alt="Logo">
       </div>
 
       <!-- Links -->
       <ul class="nav-links">
         <li><a href="#">Home</a></li>
-        <li><a href="#">Notícias</a></li>
-        <li><a href="#">Blog</a></li>
+        <li><a href="{% url 'blog' %}">Blog</a></li>
         <li><a href="#">Sobre nós</a></li>
       </ul>
     </div>
@@ -47,220 +47,77 @@
     <section class="most-liked-posts">
       <!-- Envelopador do Carrossel -->
       <div class="carousel-wrapper">
-        <div id="prev-button" class="prev-button"><img src="images/prev-icon.png" alt=""></div>
+        <div id="prev-button" class="prev-button"><img src="{% static 'media/blog_images/prev-icon.png' %}" alt="prev-icon"></div>
         <!-- Carrossel -->
         <div id="carousel" class="carousel">
         <!-- Card com as informações de notícias/sugestões -->
-        <div class="card-container">
-          <div class="image-container">
-            <img src="images/doctor.jpeg" alt="">
-          </div>
-          <h3 class="card-title">Cuide do seu pet hoje</h3>
-          <div class="description-container">
-            <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aliquid vitae facere excepturi et totam omnis, ipsum impedit hic explicabo sed amet optio ratione nobis mollitia at illum minima consequatur.</span>
-          </div>
-          <div class="author-container">
-            <span class="author">
-              Por <strong>Dra. Annelise Figueiredo</strong>
-            </span>
-          </div>
 
-          <!-- Informaçẽos de tag e data de publicação -->
-          <div class="card-footer">
-            <div class="tag">
-              <span>
-                Notícia
-              </span>
+          {%for p in blog_bar%}
+          
+          <div class="card-container">
+            <div class="image-container">
+              <img src="{{ p.imagem.url }}" alt="{{ p.title }}">
             </div>
-            <div class="date">
-              <span>
-                08/09/2025
-              </span>
+            <h3 class="card-title">{{ p.titulo }}</h3>
+            <div class="description-container">
+              <span class="description">{{ p.conteudo | truncatewords:30 }}...</span>
             </div>
-          </div>
-        </div>
-        <!-- Card com as informações de notícias/sugestões -->
-        <div class="card-container">
-          <div class="image-container">
-            <img src="images/doctor.jpeg" alt="">
-          </div>
-          <h3 class="card-title">Cuide do seu pet hoje</h3>
-          <div class="description-container">
-            <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aliquid vitae facere excepturi et totam omnis, ipsum impedit hic explicabo sed amet optio ratione nobis mollitia at illum minima consequatur.</span>
-          </div>
-          <div class="author-container">
-            <span class="author">
-              Por <strong>Dra. Annelise Figueiredo</strong>
-            </span>
-          </div>
+            <div class="author-container">
+              {%for a in p.autor.all %}
+              <span class="author">
+                Por <strong>{{ a.nomeautoridade }}</strong>
+              </span>
+              {% endfor %}
+            </div>
 
-          <!-- Informaçẽos de tag e data de publicação -->
-          <div class="card-footer">
-            <div class="tag">
-              <span>
-                Notícia
-              </span>
-            </div>
-            <div class="date">
-              <span>
-                08/09/2025
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card com as informações de notícias/sugestões -->
-        <div class="card-container">
-          <div class="image-container">
-            <img src="images/doctor.jpeg" alt="">
-          </div>
-          <h3 class="card-title">Cuide do seu pet hoje</h3>
-          <div class="description-container">
-            <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aliquid vitae facere excepturi et totam omnis, ipsum impedit hic explicabo sed amet optio ratione nobis mollitia at illum minima consequatur.</span>
-          </div>
-          <div class="author-container">
-            <span class="author">
-              Por <strong>Dra. Annelise Figueiredo</strong>
-            </span>
-          </div>
-
-          <!-- Informaçẽos de tag e data de publicação -->
-          <div class="card-footer">
-            <div class="tag">
-              <span>
-                Notícia
-              </span>
-            </div>
-            <div class="date">
-              <span>
-                08/09/2025
-              </span>
+            <!-- Informaçẽos de tag e data de publicação -->
+            <div class="card-footer">
+              {% for t in p.tags.all %}
+              <div class="tag" style="--tag-color: {{ t.cor }};">
+                <span title="{{ t.descricao }}">
+                  {{ t.nome }}
+                </span>
+              </div>
+              {% endfor %}
+              <div class="date">
+                <span>
+                  {{ p.data_criada|date:'d/m/Y' }}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-        
-
-        <!-- Card com as informações de notícias/sugestões -->
-        <div class="card-container">
-          <div class="image-container">
-            <img src="images/doctor.jpeg" alt="">
-          </div>
-          <h3 class="card-title">Cuide do seu pet hoje</h3>
-          <div class="description-container">
-            <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aliquid vitae facere excepturi et totam omnis, ipsum impedit hic explicabo sed amet optio ratione nobis mollitia at illum minima consequatur.</span>
-          </div>
-          <div class="author-container">
-            <span class="author">
-              Por <strong>Dra. Annelise Figueiredo</strong>
-            </span>
-          </div>
-
-          <!-- Informaçẽos de tag e data de publicação -->
-          <div class="card-footer">
-            <div class="tag">
-              <span>
-                Notícia
-              </span>
-            </div>
-            <div class="date">
-              <span>
-                08/09/2025
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-container">
-          <div class="image-container">
-            <img src="images/doctor.jpeg" alt="">
-          </div>
-          <h3 class="card-title">Cuide do seu pet hoje</h3>
-          <div class="description-container">
-            <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aliquid vitae facere excepturi et totam omnis, ipsum impedit hic explicabo sed amet optio ratione nobis mollitia at illum minima consequatur.</span>
-          </div>
-          <div class="author-container">
-            <span class="author">
-              Por <strong>Dra. Annelise Figueiredo</strong>
-            </span>
-          </div>
-
-          <!-- Informaçẽos de tag e data de publicação -->
-          <div class="card-footer">
-            <div class="tag">
-              <span>
-                Notícia
-              </span>
-            </div>
-            <div class="date">
-              <span>
-                08/09/2025
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-container">
-          <div class="image-container">
-            <img src="images/doctor.jpeg" alt="">
-          </div>
-          <h3 class="card-title">Cuide do seu pet hoje</h3>
-          <div class="description-container">
-            <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aliquid vitae facere excepturi et totam omnis, ipsum impedit hic explicabo sed amet optio ratione nobis mollitia at illum minima consequatur.</span>
-          </div>
-          <div class="author-container">
-            <span class="author">
-              Por <strong>Dra. Annelise Figueiredo</strong>
-            </span>
-          </div>
-
-          <!-- Informaçẽos de tag e data de publicação -->
-          <div class="card-footer">
-            <div class="tag">
-              <span>
-                Notícia
-              </span>
-            </div>
-            <div class="date">
-              <span>
-                08/09/2025
-              </span>
-            </div>
-          </div>
-        </div> 
-        
+          {% endfor %}
         </div>
         <!-- Fim do carrossel -->
-        <div id="next-button" class="next-button"><img src="images/next-icon.png" alt=""></div>
+        <div id="next-button" class="next-button"><img src="{% static 'media/blog_images/next-icon.png' %}" alt="next-icon"></div>
       </section>
     <!-- Fim da sessão dos post mais curtidos -->
 
     <!-- Botões de filtragem e ordenação -->
     <div class="filter-order-container">
-      <div class="filter-button">
-        <button id="filter-button" class="btn-filter">
-          <img src="images/filter.png" alt="">
-          <span>
-            Filtrar
-          </span>
-        </button>
-        <!-- Menu de filtros -->
-        <div id="menu-filter"class="filter-menu">
-          <ul>
-            <li>
-              <input type="checkbox"><span class="care">Cuidados</span>
-            </li>
-            <li>
-              <input type="checkbox"><span class="news">Notícia</span>
-            </li>
-            <li>
-              <input type="checkbox"><span class="update">Novidade</span>
-            </li>
-            <li>
-              <input type="checkbox"><span class="sugestion">Sugestão</span>
-            </li>
-          </ul>
+      <form method="get" action="">
+        <input type="hidden" name="ordem" value="{{ request.GET.ordem }}">
+        <div class="filter-button">
+          <button id="filter-button" class="btn-filter" type="button">
+            <img src="{% static 'media/blog_images/filter.png' %}" alt="">
+            <span>
+              Filtrar
+            </span>
+          </button>
+          <!-- Menu de filtros -->
+          <div id="menu-filter"class="filter-menu">
+            <ul>
+              {% for tag in all_tags %}
+              <li>
+                <input onchange="this.form.submit()" type="checkbox" name="tags" value="{{ tag.nome }}" {% if tag.nome in selected_tags %}checked{% endif %}/>
+                <span name="tags" class="tag-2" style="--tag-color: {{ tag.cor }};">{{ tag.nome }}</span>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
-      </div>
+      </form>
+
       <div class="order-button">
         <button id="order-button" class="btn-order">
           <img src="images/order-icon.png" alt=""></img>
@@ -271,15 +128,17 @@
         <!-- Menu de ordenação -->
         <div id="menu-order" class="order-menu">
           <ul>
-            <li>
-              <input type="radio"><span class="newer">Mais recentes</span>
-            </li>
-            <li>
-              <input type="radio"><span class="older">Mais antigos</span>
-            </li>
-            <li>
-              <input type="radio"><span class="most-popular">Mais populares</span>
-            </li>
+            <form method="get" action="">
+              <li>
+                <input type="radio" onclick="this.form.submit()" name="ordem" value="recente" {% if request.GET.ordem == 'recente' %}checked{% endif %}><span class="newer">Mais recentes</span>
+              </li>
+              <li>
+                <input type="radio" onclick="this.form.submit()" name="ordem" value="antigo" {% if request.GET.ordem == 'antigo' %}checked{% endif %}><span class="older">Mais antigos</span>
+              </li>
+              <li>
+                <input type="radio" onclick="this.form.submit()" name="ordem" value="popular" {% if request.GET.ordem == 'popular' %}checked{% endif %}><span class="most-popular">Mais populares</span>
+              </li>
+            </form>
           </ul>
         </div>
       </div>
@@ -289,83 +148,52 @@
     <!-- Sessão de notícias em card horizontais -->
     <section class="news-container">
       <!-- Card com as informações de notícias/sugestões -->
+      {% for p in blog_post %}
       <div class="news-card-container">
         <div class="image-container">
-          <img class="news-img" src="images/doctor.jpeg" alt="">
+          <img class="news-img" src="{{ p.imagem.url }}" alt="{{ p.titulo }}">
         </div>
         <div class="news-card-content">
-        <span class="news-title">
-          Cuide do seu pet hoje
-        </span>
-        <div class="description-container">
-          <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aliquid vitae facere excepturi et totam omnis, ipsum impedit hic explicabo sed amet optio ratione nobis mollitia at illum minima consequatur.</span>
-        </div>
-        <div class="author-container">
-          <span class="author">
-            Por <strong>Dra. Annelise Figueiredo</strong>
+          <span class="news-title">
+              {{ p.titulo }}
           </span>
-        </div>
+          <div class="description-container">
+            <span class="description">{{ p.conteudo | truncatewords:60 }}</span>
+          </div>
+          <div class="author-container">
+            {% for a in p.autor.all %}
+            <span class="author">
+              Por <strong>{{ a.nomeautoridade }}</strong>
+            </span>
+            {% endfor %}
+          </div>
         <!-- Informaçẽos de tag e data de publicação -->
-        <div class="card-footer">
-          <div class="tag">
-            <span>
-              Notícia
-            </span>
-          </div>
-          <div class="date">
-            <span>
-              08/09/2025
-            </span>
-          </div>
-        </div>
-      </div>
-      </div>
-
-      <!-- Card com as informações de notícias/sugestões -->
-      <div class="news-card-container">
-        <div class="image-container">
-          <img class="news-img" src="images/doctor.jpeg" alt="">
-        </div>
-        <div class="news-card-content">
-        <span class="news-title">
-          Cuide do seu pet hoje
-        </span>
-        <div class="description-container">
-          <span class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aliquid vitae facere excepturi et totam omnis, ipsum impedit hic explicabo sed amet optio ratione nobis mollitia at illum minima consequatur.</span>
-        </div>
-        <div class="author-container">
-          <span class="author">
-            Por <strong>Dra. Annelise Figueiredo</strong>
-          </span>
-        </div>
-        <!-- Informaçẽos de tag e data de publicação -->
-        <div class="card-footer">
-          <div class="tag">
-            <span>
-              Notícia
-            </span>
-          </div>
-          <div class="date">
-            <span>
-              08/09/2025
-            </span>
+          <div class="card-footer">
+            {% for tag in p.tags.all %}
+            <div class="tag" style="--tag-color: {{ tag.cor }};">
+              <span>
+                {{ tag.nome }}
+              </span>
+            </div>
+            {% endfor %}
+            <div class="date">
+              <span>
+                {{ p.data_criada | date:"d/m/Y" }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
-      </div>
+      {% endfor %}
     </section>
     <!-- Fim da sessão de notícias em card horizontais --> 
     
     <!-- Paginação -->
     <div class="pagination">
-      <a href="#" class="page-link active">1</a>
-      <a href="#" class="page-link">2</a>
-      <a href="#" class="page-link">3</a>
-      <a href="#" class="page-link">4</a>
-      <a href="#" class="page-link">5</a>
-      <a href="#" class="dots">...</a>
-      <a href="#" class="page-link">10</a>
-    </div>
+      {% for i in blog_post.paginator.page_range %}
+        <a href="?page={{ i }}" class="page-link {% if i == blog_post.number %}active{% endif %}">{{ i }}</a>
+      {% endfor %}
+     </div>  
     <!-- Fim da paginação -->
 
   </main>
@@ -376,7 +204,7 @@
   <div class="footer-container">
     <!-- Icone do site -->
      <div class="petshop-icon">
-      <img src="images/petshop-icon.svg" alt="">
+      <img src="{% static 'media/blog_images/petshop-icon.svg' %}" alt="">
      </div>
     <!-- Contatos -->
     <div class="footer-contacts">
@@ -390,9 +218,9 @@
         <li>Rio Grande do Norte</li>
       </ul>
       <ul class="social-media-list">
-        <li><img src="images/instagram.svg" alt="Icone do Instagram"></li>
-        <li><img src="images/facebook.svg" alt="Icone do Facebook"></li>
-        <li><img src="images/youtube.svg" alt="Icone do Youtube"></li>
+        <li><img src="{% static 'media/blog_images/instagram.svg' %}" alt="Icone do Instagram"></li>
+        <li><img src="{% static 'media/blog_images/facebook.svg' %}" alt="Icone do Facebook"></li>
+        <li><img src="{% static 'media/blog_images/youtube.svg' %}" alt="Icone do Youtube"></li>
       </ul>
     </div>
     <!-- Informações -->
@@ -414,5 +242,5 @@
 <!-- Fim do rodapé -->
 
 </body>
-<script src="blog-page.js"></script>
+<script src="{% static 'js/blog-page.js' %}"></script>
 </html>

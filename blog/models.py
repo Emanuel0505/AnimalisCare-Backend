@@ -7,7 +7,7 @@ class BlogPost(models.Model):
     conteudo = models.TextField(verbose_name="Conteúdo")
     autor = models.ManyToManyField(User, related_name='posts', verbose_name="Autor(es)")
     data_criada = models.DateField(auto_now_add=True, verbose_name="Data de Criação")
-    imagem = models.ImageField(upload_to='blog_images/%Y/%m/%d/')
+    imagem = models.ImageField(upload_to='blog_images/%Y/%m/%d/', default='static/media/blog_images/doctor.jpg', verbose_name="Imagem")
     tags = models.ManyToManyField('Tag', blank=True, related_name='posts')
     views = models.PositiveIntegerField(default=0, verbose_name="Número de Visualizações")
 

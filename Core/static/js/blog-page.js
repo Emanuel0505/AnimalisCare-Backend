@@ -58,15 +58,3 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Funcionalidade para mudar a paginação
-document.addEventListener("DOMContentLoaded", () => {
-  const links = document.querySelectorAll(".page-link");
-
-  links.forEach(link => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault(); // evita recarregar a página
-      links.forEach(l => l.classList.remove("active"));
-      link.classList.add("active");
-    });
-  });
-});
