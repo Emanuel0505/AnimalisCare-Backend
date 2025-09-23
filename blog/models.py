@@ -6,10 +6,13 @@ class BlogPost(models.Model):
     conteudo = models.TextField(verbose_name="Conteúdo")
     autor = models.CharField(max_length=100, verbose_name="Autor")
     data_criada = models.DateField(auto_now_add=True, verbose_name="Data de Criação")
-    imagem = models.ImageField(upload_to='blog_images/%Y/%m/%d/', verbose_name="Imagem")
+    imagem = models.ImageField(upload_to='blog_images/%Y/%m/%d/')
+    tags = models.ManyToManyField('Tag', blank=True, related_name='posts')
+    views = models.PositiveIntegerField(default=0, verbose_name="Número de Visualizações")
 
-class Autor(models.Model):
-    name = models.CharField(max_length=100, verbose_name="Nome")
-    bio = models.TextField(verbose_name="Biografia")
-    profile_picture = models.ImageField(upload_to='autor_imagens/', verbose_name="Foto de Perfil")
 
+class Tag(models.Model):
+    nome = models.CharField(max_length=50, verbose_name="Nome da Tag")
+    descricao = models.TextField(verbose_name="Descrição da Tag")
+    cor = models.CharField(max_length=7, verbose_name="Cor da Tag (Hex)", default="#FFFFFF")
+    
