@@ -4,7 +4,6 @@ from account.models import User
 
 # Create your models here.
 class BlogPost(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     titulo = models.CharField(max_length=200, verbose_name="Título")
     conteudo = models.TextField(verbose_name="Conteúdo")
     autor = models.ManyToManyField(User, related_name='posts', verbose_name="Autor(es)")
@@ -15,7 +14,6 @@ class BlogPost(models.Model):
 
 
 class Tag(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     nome = models.CharField(max_length=50, verbose_name="Nome da Tag")
     descricao = models.TextField(verbose_name="Descrição da Tag")
     cor = models.CharField(max_length=7, verbose_name="Cor da Tag (Hex)", default="#FFFFFF")

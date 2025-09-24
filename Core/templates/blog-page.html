@@ -63,7 +63,7 @@
               <span class="description">{{ p.conteudo | truncatewords:30 }}...</span>
             </div>
             <div class="author-container">
-              {%for a in p.autor.all %}
+              {% for a in p.autor.all %}
               <span class="author">
                 Por <strong>{{ a.nomeautoridade }}</strong>
               </span>

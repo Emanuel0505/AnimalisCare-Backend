@@ -3,11 +3,15 @@ from django.db.models import Count, Q, F
 from django.urls import reverse
 from .models import BlogPost, Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from homepage.models import Contato
 
 
 def blog_home(request):
     blog_post = BlogPost.objects.all().prefetch_related('tags')
     blog_bar = BlogPost.objects.all().prefetch_related('tags')
+
+    #contatos
+    contato = Contato.objects.all()
 
 
     # Filtragem por múltiplas tags (todas devem estar presentes)
@@ -48,6 +52,7 @@ def blog_home(request):
         'blog_bar': blog_bar,
         'all_tags': Tag.objects.all(),
         'selected_tags': selected_tags,
+        'contato': contato,
     }
 
     return render(request, 'blog-page.html', context)

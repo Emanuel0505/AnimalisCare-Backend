@@ -44,7 +44,6 @@ dist/
 pip-wheel-metadata/
 
 # Django
-db.sqlite3
 *.sqlite3
 uploads/
 staticfiles/

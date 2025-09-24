@@ -1,9 +1,7 @@
-import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     nomeCompleto = models.CharField(max_length=255, verbose_name="Nome Completo")
     nomeautoridade = models.CharField(max_length=255, blank=True, null=True, verbose_name="Nome de Autoridade")
     biografia = models.TextField(blank=True, null=True, verbose_name="Biografia")
