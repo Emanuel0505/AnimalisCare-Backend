@@ -6,16 +6,16 @@ from .models import User
 class UserAdmin(BaseUserAdmin):
     fieldsets = (
         (None, {"fields": ("username", "password")}),
-        ("Personal info", {"fields": ("nomeCompleto", "first_name", "last_name", "biografia", "email", "fotoPerfil")}),
+        ("Personal info", {"fields": ("nomeCompleto", "nomeautoridade", "biografia", "email", "fotoPerfil")}),
         ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
         ("Important dates", {"fields": ("last_login", "date_joined")}),
     )
     add_fieldsets = (
         (None, {
             "classes": ("wide",),
-            "fields": ("username", "password1", "password2", "email", "nomeCompleto", "first_name", "last_name",  "fotoPerfil", "biografia", "cargo"),
+            "fields": ("username", "password1", "password2", "email", "nomeCompleto", "nomeautoridade", "fotoPerfil", "biografia", "cargo"),
         }),
     )
-    list_display = ("username", "email", "first_name", "last_name", "is_staff",)
-    search_fields = ("username", "email", "first_name", "last_name")
+    list_display = ("username", "email", "nomeCompleto", "nomeautoridade", "is_staff",)
+    search_fields = ("username", "email", "nomeCompleto", "nomeautoridade")
     ordering = ("username",)
