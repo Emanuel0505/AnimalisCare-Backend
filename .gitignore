@@ -50,6 +50,7 @@ staticfiles/
 static_root/
 local_settings.py
 settings_local.py
+media/
 
 # Logs
 *.log
