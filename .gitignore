@@ -1,3 +1,70 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
-venv/
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
 
+# Python
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.so
+
+# Virtualenvs
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Ferramentas e caches
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+.pyright/
+.pyrightcache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Empacotamento
+build/
+dist/
+.eggs/
+*.egg-info/
+*.egg
+pip-wheel-metadata/
+
+# Django
+db.sqlite3
+*.sqlite3
+uploads/
+staticfiles/
+static_root/
+local_settings.py
+settings_local.py
+
+# Logs
+*.log
+logs/
+*.pid
+
+# IDE/Editor
+.vscode/
+.idea/
+*.code-workspace
+
+# Segredos e env
+.env
+.env.*
+!.env.example
+*.key
+*.pem
