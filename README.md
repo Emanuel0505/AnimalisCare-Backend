@@ -73,3 +73,7 @@ homepage/
 ```
 
 Seção elaborada com base apenas nos arquivos de configuração e estrutura disponível até agora. Para aprofundar, basta adicionar detalhes dos modelos, views e rotas à medida que forem implementados.
+
+# 👨‍💻 Autor
+
+Projeto desenvolvido por **Emanuel João e Julia Larissa** como parte do desafio do processo seletivo da EJECT.
