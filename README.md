@@ -72,12 +72,4 @@ homepage/
   apps.py
 ```
 
-## Próximas Possibilidades (Ideias)
-- Documentar modelos (`models.py`) de cada app.
-- Adicionar rotas e exemplos de endpoints (se houver API futura).
-- Incluir testes automatizados.
-- Configurar Docker e variáveis de ambiente seguras.
-
----
-
 Seção elaborada com base apenas nos arquivos de configuração e estrutura disponível até agora. Para aprofundar, basta adicionar detalhes dos modelos, views e rotas à medida que forem implementados.
